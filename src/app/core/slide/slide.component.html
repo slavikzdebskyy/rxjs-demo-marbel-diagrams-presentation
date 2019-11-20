@@ -1,0 +1,36 @@
+<div *ngIf="isShowBtns" class="btn-container">
+  <button mat-fab color="accent"
+          (click)="startDemo()">
+    Start
+  </button>
+</div>
+<div class="slide-container"
+      [ngSwitch]="slideNumber">
+
+  <section *ngSwitchCase="1">
+    <img src="../../../assets/rxjs-operators-title.png" class="title-img">
+  </section>
+
+  <section *ngSwitchCase="2">
+    <rxjs-marble-diagrams
+    #diagramComp
+    [class.hidden]="hidden"
+    [entriesMain]="entriesMain"
+    [entriesSecond]="entriesSecond"
+    [entriesThird]="entriesThird"
+    [isStopFill]="isStopFill"
+    (calcOffsetLeft)="calcOffsetLeft($event)"
+    >
+    </rxjs-marble-diagrams>
+
+  </section>
+
+  <section *ngSwitchCase="3">
+    <span>3</span>
+  </section>
+
+  <section *ngSwitchCase="4">
+    <span>4</span>
+  </section>
+
+</div>

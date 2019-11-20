@@ -1,0 +1,21 @@
+header {
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: darkblue;
+  padding: 10px;
+
+  img {
+    max-width: 300px;
+  }
+
+  .btn-container {
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+
+}
