@@ -1,36 +1,266 @@
-<div *ngIf="isShowBtns" class="btn-container">
+<div *ngIf="slideNumber !== '1'" class="slide-header">
+  <h2>
+    {{ sliderHeader }}
+  </h2>
   <button mat-fab color="accent"
+          *ngIf="isShowBtn"
           (click)="startDemo()">
     Start
   </button>
 </div>
+<div  *ngIf="slideNumber !== '1'" class="divider"></div>
+
 <div class="slide-container"
       [ngSwitch]="slideNumber">
 
-  <section *ngSwitchCase="1">
+  <section *ngSwitchCase="1" class="title">
     <img src="../../../assets/rxjs-operators-title.png" class="title-img">
   </section>
 
   <section *ngSwitchCase="2">
-    <rxjs-marble-diagrams
-    #diagramComp
-    [class.hidden]="hidden"
-    [entriesMain]="entriesMain"
-    [entriesSecond]="entriesSecond"
-    [entriesThird]="entriesThird"
-    [isStopFill]="isStopFill"
-    (calcOffsetLeft)="calcOffsetLeft($event)"
-    >
-    </rxjs-marble-diagrams>
+        <img class="img-boxed" src="../../../assets/table-1.png" alt="">
 
+        <div>
+            <div>
+                <p>
+                    <code>A1 = 1; B1 = 3;</code>
+                    <br>
+                    <mark>C1 = A1 + B1;</mark>
+                    <br>
+                </p>
+            </div>
+        </div>
   </section>
 
   <section *ngSwitchCase="3">
-    <span>3</span>
+    <img class="img-boxed" src="../../../assets/table-1.png" alt="">
+
+    <div>
+        <div>
+            <p>
+                <code>A1 = 1; B1 = 3;</code>
+                <br>
+                <code>C1 = A1 + B1;</code>
+                <br>
+                <mark>C1 ~ 4</mark>
+                <br>
+            </p>
+        </div>
+    </div>
   </section>
 
   <section *ngSwitchCase="4">
-    <span>4</span>
+    <div class="slide-description">
+      <img class="img-boxed" src="../../../assets/table-2.png" alt="">
+
+      <div>
+          <div>
+              <p>
+                  <code>A1 = 1; B1 = 3;</code>
+                  <br>
+                  <code>C1 = A1 + B1;</code>
+                  <br>
+                  <code>C1 ~ 4</code>
+                  <br>
+              </p>
+              <mat-divider class="short"></mat-divider>
+              <p>
+                <code>
+                    <mark>A1 = 2;</mark>
+                </code>
+              </p>
+          </div>
+      </div>
+    </div>
   </section>
 
-</div>
+  <section *ngSwitchCase="5">
+    <img class="img-boxed" src="../../../assets/table-3.png" alt="">
+
+    <div>
+        <div>
+            <p>
+                <code>A1 = 1; B1 = 3;</code>
+                <br>
+                <code>C1 = A1 + B1;</code>
+                <br>
+                <code>C1 ~ 4</code>
+                <br>
+            </p>
+            <mat-divider class="short"></mat-divider>
+            <p>
+              <code>
+                  <code>A1 = 2;</code>
+                  <br>
+                  <mark>C1 ~ 5</mark>
+                  <br>
+              </code>
+            </p>
+        </div>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="6">
+    <div class="two-columns">
+        <div>
+            <h3 class="mrg-bot-20">Push - strategy</h3>
+            <p>
+                <code>A1 = 1; B1 = 3;</code>
+                <br>
+                <code>C1 = A1 + B1;</code>
+                <br>
+                <code>C1 ~ 4</code>
+                <br>
+            </p>
+            <mat-divider class="short"></mat-divider>
+            <p>
+              <code>
+                  <code>A1 = 2;</code>
+                  <br>
+                  <code>C1 ~ 5</code>
+                  <br>
+              </code>
+            </p>
+        </div>
+
+        <div>
+            <h3 class="mrg-bot-20">Pull - strategy</h3>
+            <p>
+                <code>A1 = 1; B1 = 3;</code>
+                <br>
+                <code>C1 = A1 + B1;</code>
+                <br>
+                <code>C1 ~ 4</code>
+                <br>
+            </p>
+            <mat-divider class="short"></mat-divider>
+            <p>
+              <code>
+                  <code>A1 = 2;</code>
+                  <br>
+                  <mark>C1 ~ 4</mark>
+                  <br>
+              </code>
+            </p>
+        </div>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="7">
+    <div class="cente-center">
+        <h2 class="fnt-size-80">Push / Pull</h2>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="8">
+    <div class="cente-center">
+        <img src="../../../assets/graph-1.jpg" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="9">
+    <div class="cente-center">
+        <img src="../../../assets/graph-2.jpg" alt="">
+    </div>
+  </section>
+  <section *ngSwitchCase="10">
+    <div class="cente-center">
+        <img src="../../../assets/graph-3.jpg" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="11">
+    <div class="cente-center">
+        <img src="../../../assets/graph-4.jpg" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="12">
+    <div class="cente-center">
+        <img src="../../../assets/graph-5.jpg" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="13">
+    <div class="cente-center">
+        <img src="../../../assets/graph-6.jpg" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="14">
+    <div class="cente-center">
+        <h2 class="fnt-size-80">Observable</h2>
+        <h2 class="fnt-size-60">Observer pattern + Iterator pattern</h2>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="15">
+      <div class="slide-description">
+        <ngx-md [data]="content['observerPattern']">
+        </ngx-md>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="16">
+    <div class="cente-center">
+        <img src="../../../assets/observer-pattern.png" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="17">
+      <div class="slide-description">
+        <ngx-md [data]="content['iteratorPattern']">
+        </ngx-md>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="18">
+    <div class="cente-center">
+        <img src="../../../assets/iterator-pattern.png" alt="">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="19">
+    <div class="cente-center">
+        <h2 class="fnt-size-80">Observable</h2>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="20">
+      <div class="slide-description">
+        <ngx-md [data]="content['newObservable']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+        #diagramComp
+        [class.hidden]="hidden"
+        [entriesMain]="entriesMain"
+        [entriesSecond]="entriesSecond"
+        [entriesThird]="entriesThird"
+        [isStopFill]="isStopFill"
+        (calcOffsetLeft)="calcOffsetLeft($event)"
+        >
+      </rxjs-marble-diagrams>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <section *ngSwitchCase="2">
+
+
+    <div class="card-body">
+      <ngx-md [data]="content" [path]="'prismjs/components/prism-javascript'">
+      </ngx-md>
+    </div>
+  </section> -->

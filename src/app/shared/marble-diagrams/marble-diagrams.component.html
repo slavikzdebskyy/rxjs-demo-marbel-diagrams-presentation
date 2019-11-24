@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div *ngIf="entriesSecond?.length"
+    <div [class.hidden]="!entriesSecond?.length"
           class="rxjs__demo-wrapper flex-center-center">
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div *ngIf="entriesThird?.length"
+    <div [class.hidden]="!entriesThird?.length"
           class="rxjs__demo-wrapper flex-center-center">
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"

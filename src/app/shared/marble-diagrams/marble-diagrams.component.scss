@@ -9,14 +9,17 @@ $entrySize: 36px;
   align-items: center;
 }
 
+.hidden {
+  visibility: hidden;
+}
+
 
 .rxjs {
   width: 100%;
-  height: 90vh;
 
   &__demo-wrapper {
     width: $demoWidth;
-    height: 150px;
+    height: 60px;
     background-color: #ffffff;
     padding: 0 $demoPadding;
     position: relative;
