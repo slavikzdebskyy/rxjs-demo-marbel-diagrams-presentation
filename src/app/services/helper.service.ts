@@ -29,11 +29,8 @@ export class HelperService {
     if (num >= 19 && num < 30) {
       return 'Observable';
     }
-    if (num >= 31 && num < 37) {
+    if (num >= 31 && num < 39) {
       return 'Create Observable';
-    }
-    if (num >= 37 && num < 37) {
-      return 'Operators';
     }
     if (num === 39) {
       return 'Pipe';
@@ -46,6 +43,12 @@ export class HelperService {
     }
     if (num === 43) {
       return 'mergeMap()';
+    }
+    if (num === 44) {
+      return 'switchMap()';
+    }
+    if (num === 45) {
+      return 'Promise <-> Observable';
     }
     // if (num >= 31) {
     //   return 'Operators';
@@ -65,6 +68,10 @@ export class HelperService {
       case '42':
         return true;
       case '43':
+        return true;
+      case '44':
+        return true;
+      case '45':
         return true;
 
       default:

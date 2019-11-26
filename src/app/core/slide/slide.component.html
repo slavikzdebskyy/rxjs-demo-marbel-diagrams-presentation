@@ -234,9 +234,7 @@
       <rxjs-marble-diagrams
         #diagramComp
         [class.hidden]="hidden"
-        [entriesMain]="entriesMain"
-        [isStopFill]="isStopFill"
-        (calcOffsetLeft)="calcOffsetLeft($event)"
+        [streamFirst]="streamFirst"
         >
       </rxjs-marble-diagrams>
   </section>
@@ -370,11 +368,9 @@
     <rxjs-marble-diagrams
       #diagramComp
       [class.hidden]="hidden"
-      [entriesMain]="entriesMain"
-      [entriesSecond]="entriesSecond"
-      [isStopFill]="isStopFill"
-      [labels]="['subsFirst:', 'subsSecond:']"
-      (calcOffsetLeft)="calcOffsetLeft($event)"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [labels]="['SubsFirst:', 'SubsSecond:']"
       >
     </rxjs-marble-diagrams>
   </section>
@@ -397,54 +393,90 @@
   </section>
 
   <section *ngSwitchCase="41">
-      <div class="slide-description">
-        <ngx-md [data]="content['merge_1']">
-        </ngx-md>
-      </div>
-      <rxjs-marble-diagrams
+    <div class="slide-description">
+      <ngx-md [data]="content['merge_1']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
       #diagramComp
       [class.hidden]="hidden"
-      [entriesMain]="entriesMain"
-      [entriesSecond]="entriesSecond"
-      [entriesThird]="entriesThird"
-      [isStopFill]="isStopFill"
-      [labels]="['streamFirst:', 'streamSecond:', 'subscribe:']"
-      (calcOffsetLeft)="calcOffsetLeft($event)"
-      >
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['StreamFirst:', 'StreamSecond:', 'Subscribe:']">
     </rxjs-marble-diagrams>
   </section>
 
   <section *ngSwitchCase="42">
-      <div class="slide-description">
-        <ngx-md [data]="content['combineLatest']">
-        </ngx-md>
-      </div>
-      <rxjs-marble-diagrams
+    <div class="slide-description">
+      <ngx-md [data]="content['combineLatest']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
       #diagramComp
       [class.hidden]="hidden"
-      [entriesMain]="entriesMain"
-      [entriesSecond]="entriesSecond"
-      [entriesThird]="entriesThird"
-      [isStopFill]="isStopFill"
-      [labels]="['streamFirst:', 'streamSecond:', 'subscribe:']"
-      (calcOffsetLeft)="calcOffsetLeft($event)"
-      >
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['StreamFirst:', 'StreamSecond:', 'Subscribe:']">
     </rxjs-marble-diagrams>
   </section>
 
   <section *ngSwitchCase="43">
       <div class="slide-description">
-        <ngx-md [data]="content['combineLatest']">
+        <ngx-md [data]="content['mergeMap']">
         </ngx-md>
       </div>
       <rxjs-marble-diagrams
       #diagramComp
       [class.hidden]="hidden"
-      [entriesMain]="entriesMain"
-      [entriesSecond]="entriesSecond"
-      [isStopFill]="isStopFill"
-      [labels]="['stream:', 'subscribe:']"
-      (calcOffsetLeft)="calcOffsetLeft($event)"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [labels]="['Stream:', 'Subscribe']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="44">
+      <div class="slide-description">
+        <ngx-md [data]="content['switchMap']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [labels]="['Stream:', 'Subscribe']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="45">
+      <div class="slide-description">
+        <ngx-md [data]="content['switchMap_2']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [labels]="['Stream:']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="46">
+      <div class="slide-description">
+        <ngx-md [data]="content['switchMap_2']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [labels]="['Stream:']"
       >
     </rxjs-marble-diagrams>
   </section>
@@ -452,21 +484,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-  <!-- <section *ngSwitchCase="2">
-
-
-    <div class="card-body">
-      <ngx-md [data]="content" [path]="'prismjs/components/prism-javascript'">
-      </ngx-md>
-    </div>
-  </section> -->

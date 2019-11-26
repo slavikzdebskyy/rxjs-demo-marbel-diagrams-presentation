@@ -1,3 +1,6 @@
+const symbol = '';
+const num = '';
+
 export const CODE_CONTEXT: {[key: string]: string} = {
   observerPattern: ` \`\`\`javascript
   class Subject {
@@ -217,7 +220,8 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   operators_demo_1: ` \`\`\`javascript
-  const subscriptionFirst = interval(1000).pipe(
+  const subscriptionFirst = interval(1000)
+    .pipe(
       take(8),
     ).subscribe(
       next => {...};
@@ -227,13 +231,15 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   operators_demo_2: ` \`\`\`javascript
-  const subscriptionFirst = interval(1000).pipe(
+  const subscriptionFirst = interval(1000)
+    .pipe(
       take(8),
     ).subscribe(
       next => {...};
     )
 
-  const subscriptionSecond = interval(1000).pipe(
+  const subscriptionSecond = interval(1000)
+    .pipe(
       take(8),
       filter(() => Math.random > 0.3),
     ).subscribe(
@@ -270,7 +276,7 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   const streamSecond = timer(700, 1700)
     .pipe(
       map(i => 'abcdfghi'[i]),
-      take(6),
+      take(7),
     );
 
   merge(streamFirst, streamSecond)
@@ -287,7 +293,7 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   const streamSecond = timer(700, 1700)
     .pipe(
       map(i => 'abcdfghi'[i]),
-      take(6),
+      take(7),
     );
 
     combineLatest(streamFirst, streamSecond)
@@ -295,11 +301,40 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   \`\`\`
   `,
 
-  d3: ` \`\`\`javascript
+  mergeMap: ` \`\`\`javascript
+  timer(0, 1500)
+  .pipe(
+    take(4),
+    map(i => 'abcd'[i]),
+    mergeMap(symbol => timer(0, 900).pipe(
+      take(6),
+      map(num => \`${symbol} ${num}\`),
+    )),
+  );
+  \`\`\`
+  `,
+
+  switchMap: ` \`\`\`javascript
+  timer(0, 1500)
+  .pipe(
+    take(4),
+    map(i => 'abcd'[i]),
+    switchMap(symbol => timer(0, 900).pipe(
+      take(6),
+      map(num => \`${symbol} ${num}\`),
+    )),
+  );
+  \`\`\`
+  `,
+
+  switchMap_2: ` \`\`\`javascript
 
   \`\`\`
   `,
 };
+
+
+
 
 
 

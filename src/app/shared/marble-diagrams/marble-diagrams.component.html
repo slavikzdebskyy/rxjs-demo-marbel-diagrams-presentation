@@ -8,15 +8,16 @@
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
               #filled
-              [style.left]="left">
+              [style.left]="left1">
         </div>
       </div>
 
       <div class="rxjs__demo-wrapper__arrow-right"
-            [class.fill]="isTriangleFilled">
+            [class.fill]="isTriangleFilled1">
       </div>
 
       <div *ngFor="let item of entriesMain"
+
             class="rxjs__demo-wrapper__entry flex-center-center"
             [style.left]="item.offSetLeft"
             [class.last]="item.isLast"
@@ -27,7 +28,7 @@
       </div>
     </div>
 
-    <div [class.hidden]="!entriesSecond"
+    <div [class.hidden]="!streamSecond"
           class="rxjs__demo-wrapper flex-center-center">
       <span [class.hidden]="!labels[1]" class="label">
         {{ labels[1] }}
@@ -35,12 +36,12 @@
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
               #filled
-              [style.left]="left">
+              [style.left]="left2">
         </div>
       </div>
 
       <div class="rxjs__demo-wrapper__arrow-right"
-            [class.fill]="isTriangleFilled">
+            [class.fill]="isTriangleFilled2">
       </div>
 
       <div *ngFor="let item of entriesSecond"
@@ -54,7 +55,7 @@
       </div>
     </div>
 
-    <div [class.hidden]="!entriesThird"
+    <div [class.hidden]="!streamThird"
           class="rxjs__demo-wrapper flex-center-center">
       <span [class.hidden]="!labels[2]" class="label">
         {{ labels[2] }}
@@ -62,12 +63,12 @@
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
               #filled
-              [style.left]="left">
+              [style.left]="left3">
         </div>
       </div>
 
       <div class="rxjs__demo-wrapper__arrow-right"
-            [class.fill]="isTriangleFilled">
+            [class.fill]="isTriangleFilled3">
       </div>
 
       <div *ngFor="let item of entriesThird"
