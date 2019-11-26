@@ -1,4 +1,4 @@
-<div *ngIf="slideNumber !== '1'" class="slide-header">
+<div *ngIf="isShowSlideHeader" class="slide-header">
   <h2>
     {{ sliderHeader }}
   </h2>
@@ -8,7 +8,7 @@
     Start
   </button>
 </div>
-<div  *ngIf="slideNumber !== '1'" class="divider"></div>
+<div  *ngIf="isShowSlideHeader" class="divider"></div>
 
 <div class="slide-container"
       [ngSwitch]="slideNumber">
@@ -235,12 +235,218 @@
         #diagramComp
         [class.hidden]="hidden"
         [entriesMain]="entriesMain"
-        [entriesSecond]="entriesSecond"
-        [entriesThird]="entriesThird"
         [isStopFill]="isStopFill"
         (calcOffsetLeft)="calcOffsetLeft($event)"
         >
       </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="21">
+    <div class="slide-description">
+      <ngx-md [data]="content['observableVsPromise']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="22">
+    <div class="slide-description">
+      <ngx-md [data]="content['subsunsubs']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="23">
+    <div class="slide-description">
+      <ngx-md [data]="content['clearInterval']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="24">
+    <div class="slide-description">
+      <ngx-md [data]="content['aboutSubs_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="25">
+    <div class="slide-description">
+      <ngx-md [data]="content['aboutSubs_1']">
+      </ngx-md>
+    </div>
+    <div class="doesnt-work">
+      <img src="../../../assets/doesnt_work.jpg" class="d-w">
+    </div>
+  </section>
+
+  <section *ngSwitchCase="26">
+    <div class="slide-description">
+      <ngx-md [data]="content['aboutSubs_2']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="27">
+    <div class="slide-description">
+      <ngx-md [data]="content['aboutSubs_3']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="28">
+    <div class="slide-description">
+      <ngx-md [data]="content['aboutSubs_4']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="29">
+    <div class="slide-description">
+      <ngx-md [data]="content['aboutSubs_5']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="30">
+    <div class="cente-center">
+        <h2 class="fnt-size-80">Operators</h2>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="31">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_create']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="32">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_create_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="33">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_create_2']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="34">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_create_3']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="35">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_create_4']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="36">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_create_5']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="37">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_demo_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="38">
+    <div class="slide-description">
+      <ngx-md [data]="content['operators_demo_2']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [entriesMain]="entriesMain"
+      [entriesSecond]="entriesSecond"
+      [isStopFill]="isStopFill"
+      [labels]="['subsFirst:', 'subsSecond:']"
+      (calcOffsetLeft)="calcOffsetLeft($event)"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="39">
+      <ngx-md [data]="content['pipe_1']" class="bg-code">
+      </ngx-md>
+    <div class="pipe bg-code">
+      <img src="../../../assets/pipe_2.gif" class="p">
+    </div>
+    <ngx-md [data]="content['pipe_2']" class="bg-code">
+    </ngx-md>
+  </section>
+
+  <section *ngSwitchCase="40">
+      <div class="slide-description">
+        <ngx-md [data]="content['merge']">
+        </ngx-md>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="41">
+      <div class="slide-description">
+        <ngx-md [data]="content['merge_1']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [entriesMain]="entriesMain"
+      [entriesSecond]="entriesSecond"
+      [entriesThird]="entriesThird"
+      [isStopFill]="isStopFill"
+      [labels]="['streamFirst:', 'streamSecond:', 'subscribe:']"
+      (calcOffsetLeft)="calcOffsetLeft($event)"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="42">
+      <div class="slide-description">
+        <ngx-md [data]="content['combineLatest']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [entriesMain]="entriesMain"
+      [entriesSecond]="entriesSecond"
+      [entriesThird]="entriesThird"
+      [isStopFill]="isStopFill"
+      [labels]="['streamFirst:', 'streamSecond:', 'subscribe:']"
+      (calcOffsetLeft)="calcOffsetLeft($event)"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="43">
+      <div class="slide-description">
+        <ngx-md [data]="content['combineLatest']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [entriesMain]="entriesMain"
+      [entriesSecond]="entriesSecond"
+      [isStopFill]="isStopFill"
+      [labels]="['stream:', 'subscribe:']"
+      (calcOffsetLeft)="calcOffsetLeft($event)"
+      >
+    </rxjs-marble-diagrams>
   </section>
 
 

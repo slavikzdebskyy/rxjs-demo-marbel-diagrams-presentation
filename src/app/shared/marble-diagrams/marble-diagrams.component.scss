@@ -13,6 +13,12 @@ $entrySize: 36px;
   visibility: hidden;
 }
 
+.label {
+  position: absolute;
+  left: -150px;
+  font-size: 21px;
+}
+
 
 .rxjs {
   width: 100%;

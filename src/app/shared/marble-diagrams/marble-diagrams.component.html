@@ -2,6 +2,9 @@
 
   <div>
     <div class="rxjs__demo-wrapper flex-center-center">
+      <span [class.hidden]="!labels[0]" class="label">
+        {{ labels[0] }}
+      </span>
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
               #filled
@@ -24,8 +27,11 @@
       </div>
     </div>
 
-    <div [class.hidden]="!entriesSecond?.length"
+    <div [class.hidden]="!entriesSecond"
           class="rxjs__demo-wrapper flex-center-center">
+      <span [class.hidden]="!labels[1]" class="label">
+        {{ labels[1] }}
+      </span>
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
               #filled
@@ -48,8 +54,11 @@
       </div>
     </div>
 
-    <div [class.hidden]="!entriesThird?.length"
+    <div [class.hidden]="!entriesThird"
           class="rxjs__demo-wrapper flex-center-center">
+      <span [class.hidden]="!labels[2]" class="label">
+        {{ labels[2] }}
+      </span>
       <div class="rxjs__demo-wrapper__x">
         <div class="rxjs__demo-wrapper__x__filled"
               #filled

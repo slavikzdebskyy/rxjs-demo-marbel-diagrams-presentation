@@ -26,6 +26,8 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
   public entriesThird: EntryItem[];
   @Input()
   public isStopFill: boolean;
+  @Input()
+  public labels: string[];
 
   @Output()
   public calcOffsetLeft: EventEmitter<string>;
@@ -38,8 +40,7 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
   constructor() {
     this.subs = new Subscription();
     this.entriesMain = [];
-    this.entriesSecond = [];
-    this.entriesThird = [];
+    this.labels = [];
     this.isStopFill = false;
     this.calcOffsetLeft = new EventEmitter();
    }
