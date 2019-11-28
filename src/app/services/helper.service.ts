@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { of, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -92,8 +91,15 @@ export class HelperService {
     if (num >= 74 && num < 76) {
       return 'Subject';
     }
-
-
+    if (num >= 79 && num < 82) {
+      return 'skipWhile() vs filter()';
+    }
+    if (num >= 82 && num < 84) {
+      return 'forkJoin() vs concat()';
+    }
+    if (num >= 84 && num < 86) {
+      return 'custom Rxjs operators';
+    }
 
     return 'Reactive programming';
   }
@@ -101,28 +107,20 @@ export class HelperService {
   public isShowBtn(slideNumber: string): boolean {
     switch (slideNumber) {
       case '20':
-        return true;
       case '38':
-        return true;
       case '41':
-        return true;
       case '42':
-        return true;
       case '43':
-        return true;
       case '44':
-        return true;
       case '46':
-        return true;
       case '48':
-        return true;
       case '57':
-        return true;
       case '59':
-        return true;
       case '74':
-        return true;
       case '75':
+      case '81':
+      case '83':
+      case '85':
         return true;
 
       default:
@@ -133,32 +131,20 @@ export class HelperService {
   public isShowSlideHeader(slideNumber: string): boolean {
     switch (slideNumber) {
       case '1':
-        return false;
       case '7':
-        return false;
       case '14':
-        return false;
       case '19':
-        return false;
       case '30':
-        return false;
       case '53':
-        return false;
       case '76':
+      case '77':
+      case '78':
+      case '86':
+      case '87':
         return false;
 
       default:
         return true;
     }
   }
-
-
-
-
-
-  public test() {
-
-
-  }
-
 }

@@ -11,6 +11,7 @@
 <div  *ngIf="isShowSlideHeader" class="divider"></div>
 
 <div class="slide-container"
+      [class.fullH]="!isShowSlideHeader"
       [ngSwitch]="slideNumber">
 
   <section *ngSwitchCase="1" class="title">
@@ -638,7 +639,7 @@
       [streamSecond]="streamSecond"
       [streamThird]="streamThird"
       [labels]="['streamFirst:', 'streamSecond', 'streamThird']"
-      (demoStarted)="catchEmmit59()"
+      (demoStarted)="catchEmmit()"
     >
     </rxjs-marble-diagrams>
   </section>
@@ -767,11 +768,100 @@
     </div>
   </section>
 
-  <section *ngSwitchCase="76">
+  <section *ngSwitchCase="76" class="end-section">
+  </section>
+
+  <section *ngSwitchCase="77" class="end-section">
+  </section>
+
+  <section *ngSwitchCase="78">
     <div class="cente-center">
-        <h2 class="fnt-size-80">The End</h2>
+        <h2 class="fnt-size-80">Bonus:</h2>
     </div>
   </section>
+
+  <section *ngSwitchCase="79">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_filter_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="80">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_filter_2']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="81">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_filter_3']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['streamFirst:', 'streamSecond', 'streamThird']"
+    >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="82">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_concat_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="83">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_concat_2']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['streamFirst:', 'streamSecond']"
+    >
+    </rxjs-marble-diagrams>
+  </section>
+
+
+  <section *ngSwitchCase="84">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_cutom_func_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="85">
+    <div class="slide-description">
+      <ngx-md [data]="content['bon_cutom_func_2']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+    #diagramComp
+    [class.hidden]="hidden"
+    [streamFirst]="streamFirst"
+    [streamSecond]="streamSecond"
+    [streamThird]="streamThird"
+    [labels]="['streamFirst:', 'streamSecond']"
+  >
+  </rxjs-marble-diagrams>
+  </section>
+
+
+  <section *ngSwitchCase="86" class="end-section-2">
+    </section>
+  <section *ngSwitchCase="87" class="end-section-2">
+    </section>
 
 
 

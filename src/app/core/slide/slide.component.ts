@@ -2,11 +2,12 @@ import { Component, ViewChild, OnDestroy, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MarbleDiagramsComponent } from 'src/app/shared/marble-diagrams/marble-diagrams.component';
 
-import { pluck, map, filter, distinctUntilChanged, take, mergeMap, switchMap, debounceTime, catchError, tap } from 'rxjs/operators';
-import { Subscription, timer, interval, Observable, merge, combineLatest, from, of, fromEvent, EMPTY, Subject, BehaviorSubject } from 'rxjs';
+import { pluck, map, filter, distinctUntilChanged,
+  take, mergeMap, switchMap, debounceTime, tap, skipWhile } from 'rxjs/operators';
+import { Subscription, timer, interval, Observable,
+  merge, combineLatest, from, fromEvent, Subject, BehaviorSubject, forkJoin, concat } from 'rxjs';
 
 import { CODE_CONTEXT } from '../constants/code-context';
-import { COLORS } from '../constants/other';
 import { HelperService } from './../../services/helper.service';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,7 +25,7 @@ export class SlideComponent implements OnDestroy {
   public input: ElementRef;
 
   public isShowSlideHeader: boolean;
-  public hidden: boolean;
+  public hidden: boolean; // is marbel diagram hidden
   public isShowBtn: boolean;
   public slideNumber: string;
   public sliderHeader: string;
@@ -50,7 +51,6 @@ export class SlideComponent implements OnDestroy {
     this.inputValues = [];
     this.subject = new Subject();
 
-
     this.routeListener();
   }
 
@@ -66,16 +66,7 @@ export class SlideComponent implements OnDestroy {
       return;
     }
 
-    if (this.slideNumber === '74') {
-      this.catchEmmit74();
-      return;
-    }
-
-    if (this.slideNumber === '75') {
-      this.catchEmmit75();
-      return;
-    }
-
+    this.prepareDemo();
     this.diagramComp.startDemo();
   }
 
@@ -101,6 +92,7 @@ export class SlideComponent implements OnDestroy {
     this.streamFirst = null;
     this.streamSecond = null;
     this.streamThird = null;
+    this.hidden = true;
 
     if (this.slideNumber === '20') {
       this.streamFirst = new Observable<any>(observer => {
@@ -321,60 +313,126 @@ export class SlideComponent implements OnDestroy {
       this.inputValues = [];
     }
 
+    if (this.slideNumber === '81') {
+      const array = [0, null, 36, 'q', 78, 102, undefined, 's', 32, 1, '23', 49, 57];
+
+      this.streamFirst = timer(0, 1000)
+        .pipe(
+          take(10),
+          map(i => [0, 'null', 36, 'q', 78, 102, 'undfd', 's', 32, 1, '23', 49, 57][i]),
+        );
+
+      this.streamSecond = timer(0, 1000)
+        .pipe(
+          take(10),
+          map(i => array[i]),
+          skipWhile(num => !num),
+        );
+
+      this.streamThird = timer(0, 1000)
+        .pipe(
+          take(10),
+          map(i => array[i]),
+          filter(Boolean),
+        );
+    }
+
+    if (this.slideNumber === '83') {
+
+      const streamOne = timer(0, 800)
+        .pipe(
+          take(6),
+          map(i => 'abcdfghijklmn'[i]),
+        );
+
+      const streamTwo = timer(0, 1200)
+        .pipe(
+          take(5),
+        );
+
+      this.streamFirst = forkJoin(streamOne, streamTwo);
+
+      this.streamSecond = concat(streamOne, streamTwo);
+    }
+
+    if (this.slideNumber === '85') {
+
+      const array = [2, 7, 12, 4, 9, 15, 70, 2, 20, 32, 1, 17, 5];
+
+      function customFilter() {
+        return stream => {
+          return stream
+          .pipe(
+            filter(val => val > 10),
+          );
+        };
+      }
+
+      this.streamFirst = timer(0, 800)
+        .pipe(
+          take(10),
+          map(i => array[i]),
+        );
+
+      this.streamSecond = timer(0, 800)
+        .pipe(
+          take(10),
+          map(i => array[i]),
+          customFilter(),
+        );
+    }
+
   }
 
-  public catchEmmit75(): void {
+  prepareDemo() {
     this.inputValues = [];
-
-    const subject = new BehaviorSubject<any>(null);
-
     const stream = this.http.get('https://jsonplaceholder.typicode.com/todos/1');
 
-    stream
+    if (this.slideNumber === '74') {
+      stream.subscribe(
+        res => this.inputValues.push(res),
+      );
+
+      stream.subscribe(
+        res => setTimeout(() => this.inputValues.push(res), 1555),
+      );
+    }
+
+    if (this.slideNumber === '75') {
+      const subject = new BehaviorSubject<any>(null);
+
+      stream
       .pipe(
         tap(value => console.log(value)),
         tap(value => subject.next(value))
       )
-    .subscribe();
+      .subscribe();
 
-    subject
-    .pipe(filter(Boolean))
-    .subscribe(res => this.inputValues.push(res));
+      subject
+      .pipe(filter(Boolean))
+      .subscribe(res => this.inputValues.push(res));
 
-    setTimeout(() => {
-      subject.subscribe(res => this.inputValues.push(res));
-    }, 1500);
+      setTimeout(() => {
+        subject.subscribe(res => this.inputValues.push(res));
+      }, 1500);
 
-    setTimeout(() => {
-      subject.subscribe(res => this.inputValues.push(res));
-    }, 2500);
+      setTimeout(() => {
+        subject.subscribe(res => this.inputValues.push(res));
+      }, 2500);
+    }
   }
 
-  public catchEmmit74(): void {
-    this.inputValues = [];
-
-    const stream = this.http.get('https://jsonplaceholder.typicode.com/todos/1');
-
-    stream.subscribe(
-      res => this.inputValues.push(res),
-    );
-
-    stream.subscribe(
-      res => setTimeout(() => this.inputValues.push(res), 1555),
-    );
-  }
-
-  public catchEmmit59(): void {
+  public catchEmmit(): void {
     const random = () => Math.floor(Math.random() * 100);
 
-    this.subject.next(random());
-    setTimeout(() => this.subject.next(random()), 1000);
-    setTimeout(() => this.subject.next(random()), 2000);
-    setTimeout(() => this.subject.next(random()), 3000);
-    setTimeout(() => this.subject.next(random()), 4000);
-    setTimeout(() => this.subject.complete(), 5000);
-
-
+    if (this.slideNumber === '59') {
+      this.subject.next(random());
+      setTimeout(() => this.subject.next(random()), 1000);
+      setTimeout(() => this.subject.next(random()), 2000);
+      setTimeout(() => this.subject.next(random()), 3000);
+      setTimeout(() => this.subject.next(random()), 4000);
+      setTimeout(() => this.subject.complete(), 5000);
+    }
   }
 
 

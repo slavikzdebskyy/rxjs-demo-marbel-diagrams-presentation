@@ -420,6 +420,8 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   subject_1: ` \`\`\`javascript
+  const random = () => Math.floor(Math.random() * 100);
+
   const stream = timer(0, 1000)
     .pipe(
       take(7),
@@ -430,6 +432,8 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   subject_2: ` \`\`\`javascript
+  const random = () => Math.floor(Math.random() * 100);
+
   const stream = timer(0, 1000)
     .pipe(
       take(7),
@@ -442,6 +446,8 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   subject_3: ` \`\`\`javascript
+  const random = () => Math.floor(Math.random() * 100);
+
   const stream = timer(0, 1000)
     .pipe(
       take(7),
@@ -455,6 +461,8 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   subject_4: ` \`\`\`javascript
+  const random = () => Math.floor(Math.random() * 100);
+
   const stream = timer(0, 1000)
     .pipe(
       take(7),
@@ -616,7 +624,6 @@ export const CODE_CONTEXT: {[key: string]: string} = {
     .pipe(
       map(...),
       switchMap(...),
-      takeUntil(destroyStream),
     )
     .subscribe();
 
@@ -632,7 +639,6 @@ export const CODE_CONTEXT: {[key: string]: string} = {
     .pipe(
       map(...),
       switchMap(...),
-      takeUntil(destroyStream),
     )
     .subscribe();
 
@@ -650,7 +656,6 @@ export const CODE_CONTEXT: {[key: string]: string} = {
     .pipe(
       map(...),
       switchMap(...),
-      takeUntil(destroyStream),
     )
     .subscribe();
 
@@ -738,22 +743,139 @@ export const CODE_CONTEXT: {[key: string]: string} = {
 
   stream
     .pipe(
-      tap(value => console.log(value)),
       tap(value => subject.next(value))
     )
   .subscribe();
 
   subject
-  .pipe(filter(Boolean))
-  .subscribe(res => this.inputValues.push(res));
+    .pipe(filter(Boolean))
+    .subscribe(res => console.log(res));
 
   setTimeout(() => {
-    subject.subscribe(res => this.inputValues.push(res));
+    subject.subscribe(res => console.log(res));
   }, 1500);
 
   setTimeout(() => {
-    subject.subscribe(res => this.inputValues.push(res));
+    subject.subscribe(res => console.log(res));
   }, 2500);
+  \`\`\`
+  `,
+
+  bon_filter_1: ` \`\`\`javascript
+  const array = [0, null, 36, 'q', 78, 102, undefined, 's', 32, 1, '23', 49, 57];
+
+  const streamFirst = timer(0, 1000)
+    .pipe(
+      take(10),
+      map(i => array[i]),
+    );
+
+  \`\`\`
+  `,
+
+  bon_filter_2: ` \`\`\`javascript
+  const array = [0, null, 36, 'q', 78, 102, undefined, 's', 32, 1, '23', 49, 57];
+
+  const streamFirst = timer(0, 1000)
+    .pipe(...);
+
+  const streamSecond = timer(0, 1000)
+    .pipe(
+      take(10),
+      map(i => array[i]),
+      skipWhile(num => !num),
+    );
+
+  \`\`\`
+  `,
+
+  bon_filter_3: ` \`\`\`javascript
+  const array = [0, null, 36, 'q', 78, 102, undefined, 's', 32, 1, '23', 49, 57];
+
+  const streamFirst = timer(0, 1000)
+    .pipe(...);
+
+  const streamSecond = timer(0, 1000)
+    .pipe(... skipWhile(num => !num),
+    );
+
+  const streamThird = timer(0, 1000)
+    .pipe(
+      take(10),
+      map(i => array[i]),
+      filter(Boolean),
+    );
+
+  \`\`\`
+  `,
+
+  bon_concat_1: ` \`\`\`javascript
+  const streamOne = timer(0, 800)
+  .pipe(
+    take(6),
+    map(i => 'abcdfghijklmn'[i]),
+  );
+
+  const streamTwo = timer(0, 1200)
+    .pipe(
+      take(5),
+    );
+
+  \`\`\`
+  `,
+
+  bon_concat_2: ` \`\`\`javascript
+  const streamOne = timer(0, 800)
+  .pipe(
+    take(6),
+    map(i => 'abcdfghijklmn'[i]),
+  );
+
+  const streamTwo = timer(0, 1200)
+    .pipe(
+      take(5),
+    );
+
+  const streamFirst = forkJoin(streamOne, streamTwo);
+
+  const streamSecond = concat(streamOne, streamTwo);
+
+  \`\`\`
+  `,
+
+  bon_cutom_func_1: ` \`\`\`javascript
+  const array = [2, 7, 12, 4, 9, 15, 70, 2, 20];
+
+  function customFilter() {
+    return stream => {
+      return stream
+      .pipe(
+        filter(val => val > 10),
+      );
+    };
+  }
+
+  \`\`\`
+  `,
+
+  bon_cutom_func_2: ` \`\`\`javascript
+  const array = [[2, 7, 12, 4, 9, 15, 70, 2, 20, 32, 1, 17, 5];
+
+  function customFilter() {
+    return stream => {
+      return stream
+      .pipe(
+        filter(val => val > 10),
+      );
+    };
+  }
+
+  const streamFirst = timer(0, 800)     const streamSecond = timer(0, 800)
+    .pipe(                                .pipe(
+      take(10),                              take(10),
+      map(i => array[i]),                   map(i => array[i]),
+    );                                      customFilter(),
+                                          );
   \`\`\`
   `,
 

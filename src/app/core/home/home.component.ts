@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { pluck, distinctUntilChanged, take, filter, tap, map } from 'rxjs/operators';
+import { pluck, take, filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'rxjs-home',
@@ -16,7 +16,6 @@ export class HomeComponent implements OnDestroy {
 
   constructor(
     private router: Router,
-    private activeRoute: ActivatedRoute,
   ) {
     this.subs = new Subscription();
     this.slideNumber = 1;
@@ -32,6 +31,7 @@ export class HomeComponent implements OnDestroy {
         )
       .subscribe((param: number) => this.slideNumber = param)
     );
+
   }
 
   public ngOnDestroy(): void {
@@ -39,6 +39,9 @@ export class HomeComponent implements OnDestroy {
   }
 
  public toSlaide(num: number): void {
+   console.log(num)
+   console.log(this.slideNumber)
+
    if (this.slideNumber + num < 1) {
      return;
    }
