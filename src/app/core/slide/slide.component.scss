@@ -122,3 +122,19 @@ ngx-md {
 .bg-code {
   background-color: #f5f2f0;
 }
+
+.input {
+  padding: 10px;
+}
+
+.consolelog {
+  width: 100%;
+  min-height: 300px;
+  background-color: #000;
+  color: cyan;
+  padding: 5px 20px;
+
+  .white {
+    color: #f5f2f0;
+  }
+}

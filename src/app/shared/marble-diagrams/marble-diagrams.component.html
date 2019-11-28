@@ -1,7 +1,8 @@
 <div class="rxjs flex-center-center">
 
   <div>
-    <div class="rxjs__demo-wrapper flex-center-center">
+    <div [class.hidden]="!streamFirst"
+         class="rxjs__demo-wrapper flex-center-center">
       <span [class.hidden]="!labels[0]" class="label">
         {{ labels[0] }}
       </span>
@@ -41,11 +42,13 @@
       </div>
 
       <div class="rxjs__demo-wrapper__arrow-right"
-            [class.fill]="isTriangleFilled2">
+            [class.fill]="isTriangleFilled2"
+            (click)="isMoveDown = !isMoveDown">
       </div>
 
       <div *ngFor="let item of entriesSecond"
             class="rxjs__demo-wrapper__entry flex-center-center"
+            [class.moveDown]="isMoveDown"
             [style.left]="item.offSetLeft"
             [class.last]="item.isLast"
             [style.backgroundColor]="item.color">

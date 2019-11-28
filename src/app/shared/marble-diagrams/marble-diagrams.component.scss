@@ -85,4 +85,8 @@ $entrySize: 36px;
   }
 }
 
+.moveDown:nth-child(2n):not(:last-child) {
+   top: 45px;
+}
+
 

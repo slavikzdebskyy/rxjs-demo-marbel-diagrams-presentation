@@ -1,5 +1,6 @@
-const symbol = '';
-const num = '';
+const symbol = '${symbol}';
+const num = '${num}';
+const value = '${value}';
 
 export const CODE_CONTEXT: {[key: string]: string} = {
   observerPattern: ` \`\`\`javascript
@@ -33,7 +34,7 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   newObservable: ` \`\`\`javascript
-  const stream: Observable = new Observable(observer => {
+  const stream = new Observable(observer => {
     observer.next(1);
     setTimeout(() => observer.next(2), 1000);
     setTimeout(() => observer.next(3), 2000);
@@ -328,9 +329,434 @@ export const CODE_CONTEXT: {[key: string]: string} = {
   `,
 
   switchMap_2: ` \`\`\`javascript
+  const getPromise = val => new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(val);
+    }, 1500);
+  });
+
+  this.streamFirst = from(getPromise('🤡'));
+  \`\`\`
+  `,
+
+  switchMap_3: ` \`\`\`javascript
+  streamFirst = new Observable(observer => {
+    observer.next(1);
+    setTimeout(() => observer.next(2), 2000);
+    setTimeout(() => observer.next(3), 3000);
+    setTimeout(() => observer.complete(), 4000);
+  });
+  \`\`\`
+  `,
+
+  switchMap_4: ` \`\`\`javascript
+  streamFirst = new Observable(observer => {
+    observer.next(1);
+    setTimeout(() => observer.next(2), 2000);
+    setTimeout(() => observer.next(3), 3000);
+    setTimeout(() => observer.complete(), 4000);
+  });
+
+  streamSecond = streamFirst
+    .pipe(
+      switchMap(val => getPromise(val)),
+    );
 
   \`\`\`
   `,
+
+  input_demo_1: ` \`\`\`javascript
+  fromEvent(inputElement, 'input')
+    .pipe(
+      map(event => event.target.value)
+    )
+    .subscribe(value => {
+      console.log(value);
+    })
+
+  \`\`\`
+  `,
+
+  input_demo_2: ` \`\`\`javascript
+  fromEvent(inputElement, 'input')
+    .pipe(
+      pluck('target', 'value'),
+      debounceTime(500),
+    )
+    .subscribe(value => {
+      console.log(value);
+    })
+
+  \`\`\`
+  `,
+
+  input_demo_3: ` \`\`\`javascript
+  fromEvent(inputElement, 'input')
+    .pipe(
+      pluck('target', 'value'),
+      debounceTime(500),
+      distinctUntilChanged(),
+    )
+    .subscribe(value => {
+      console.log(value);
+    })
+
+  \`\`\`
+  `,
+
+  input_demo_4: ` \`\`\`javascript
+  fromEvent(inputElement, 'input')
+    .pipe(
+      pluck('target', 'value'),
+      debounceTime(500),
+      distinctUntilChanged(),
+      switchMap(value => getData(\`http://dummy.restapiexample.com/api/v1/employee/${value}\`)),
+    )
+    .subscribe(value => {
+      console.log(value);
+    })
+
+  \`\`\`
+  `,
+
+  subject_1: ` \`\`\`javascript
+  const stream = timer(0, 1000)
+    .pipe(
+      take(7),
+      map(() => random()),
+    );
+
+  \`\`\`
+  `,
+
+  subject_2: ` \`\`\`javascript
+  const stream = timer(0, 1000)
+    .pipe(
+      take(7),
+      map(() => random()),
+    );
+
+  stream.subscribe();
+
+  \`\`\`
+  `,
+
+  subject_3: ` \`\`\`javascript
+  const stream = timer(0, 1000)
+    .pipe(
+      take(7),
+      map(() => random()),
+    );
+
+  stream.subscribe();
+  stream.subscribe();
+
+  \`\`\`
+  `,
+
+  subject_4: ` \`\`\`javascript
+  const stream = timer(0, 1000)
+    .pipe(
+      take(7),
+      map(() => random()),
+    );
+
+  stream.subscribe();
+  stream.subscribe();
+  setTimeout(() => {
+    stream.subscribe();
+  }, 1500);
+
+  \`\`\`
+  `,
+
+  subject_5: ` \`\`\`javascript
+  const subject = new Subject();
+
+  subject.next(random());
+  setTimeout(() => subject.next(random()), 1000);
+  setTimeout(() => subject.next(random()), 2000);
+  setTimeout(() => subject.next(random()), 3000);
+  setTimeout(() => subject.next(random()), 4000);
+  setTimeout(() => subject.complete(), 5000);
+
+  \`\`\`
+  `,
+
+  subject_6: ` \`\`\`javascript
+  const subject = new Subject();
+
+  subject.next(random());
+  setTimeout(() => subject.next(random()), 1000);
+  setTimeout(() => subject.next(random()), 2000);
+  setTimeout(() => subject.next(random()), 3000);
+  setTimeout(() => subject.next(random()), 4000);
+  setTimeout(() => subject.complete(), 5000);
+
+  subject.subscribe();
+  setTimeout(() => subject.subscribe(), 1200);
+  setTimeout(() => subject.subscribe(), 2200);
+
+  \`\`\`
+  `,
+
+  unsubscribe_1: ` \`\`\`javascript
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+    )
+    .subscribe();
+
+  \`\`\`
+  `,
+
+  unsubscribe_2: ` \`\`\`javascript
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+    )
+    .subscribe();
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  \`\`\`
+  `,
+
+  unsubscribe_3: ` \`\`\`javascript
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+    )
+    .subscribe();
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
+  }
+
+  \`\`\`
+  `,
+
+  unsubscribe_4: ` \`\`\`javascript
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+    )
+    .subscribe();
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
+  }
+
+  \`\`\`
+  `,
+
+  unsubscribe_5: ` \`\`\`javascript
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+    )
+    .subscribe();
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.subscription2.unsubscribe();
+    this.subscription3.unsubscribe();
+    ...
+  }
+
+  \`\`\`
+  `,
+
+  unsubscribe_6: ` \`\`\`javascript
+  const destroyStream = new Subject();
+
+  stream
+    .pipe(
+      map(...),
+      switchMap(...),
+      takeUntil(destroyStream),
+    )
+    .subscribe();
+
+  \`\`\`
+  `,
+
+  unsubscribe_7: ` \`\`\`javascript
+  const destroyStream = new Subject();
+
+  stream
+    .pipe(
+      map(...),
+      switchMap(...),
+      takeUntil(destroyStream),
+    )
+    .subscribe();
+
+  public ngOnDestroy(): void {
+    destroyStream.next();
+  }
+
+  \`\`\`
+  `,
+
+  unsubscribe_8: ` \`\`\`javascript
+  const subscriptions = new Subscription();
+
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+      takeUntil(destroyStream),
+    )
+    .subscribe();
+
+    subscriptions.add(subscription);
+
+  \`\`\`
+  `,
+
+  unsubscribe_9: ` \`\`\`javascript
+  const subscriptions = new Subscription();
+
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+      takeUntil(destroyStream),
+    )
+    .subscribe();
+
+    subscriptions.add(subscription);
+    subscriptions.add(subscription1);
+    subscriptions.add(subscription2);
+
+  \`\`\`
+  `,
+
+  unsubscribe_10: ` \`\`\`javascript
+  const subscriptions = new Subscription();
+
+  const subscription = stream
+    .pipe(
+      map(...),
+      switchMap(...),
+      takeUntil(destroyStream),
+    )
+    .subscribe();
+
+    subscriptions.add(subscription);
+    subscriptions.add(subscription1);
+    subscriptions.add(subscription2);
+
+    public ngOnDestroy(): void {
+      subscriptions.unsubscribe();
+    }
+
+  \`\`\`
+  `,
+
+  auth_1: ` \`\`\`javascript
+  class AuthService {
+    private authSubject = new BehaviorSubject<boolean>(false);
+
+  }
+
+  \`\`\`
+  `,
+
+  auth_2: ` \`\`\`javascript
+  class AuthService {
+    private authSubject = new BehaviorSubject<boolean>(false);
+
+    setAuthState(state: boolean): void {
+      this.authSubject.next(state);
+    }
+  }
+
+  \`\`\`
+  `,
+
+  auth_3: ` \`\`\`javascript
+  class AuthService {
+    private authSubject = new BehaviorSubject<boolean>(false);
+
+    setAuthState(state: boolean): void {...}
+
+    getState(): Observable<boolean> {
+      return this.authSubject.asObservable();
+    }
+
+  }
+
+  \`\`\`
+  `,
+
+  auth_4: ` \`\`\`javascript
+  class AuthService {
+    private authSubject = new BehaviorSubject<boolean>(false);
+
+    setAuthState(state: boolean): void {...}
+
+    getState(): Observable<boolean> {...}
+
+    getCurrentState(): boolean {
+      return this.authSubject.getValue();
+    }
+
+  }
+
+  \`\`\`
+  `,
+
+  fetch_subj_1: ` \`\`\`javascript
+  const stream = this.http.get('https://jsonplaceholder.typicode.com/todos/1');
+
+  stream.subscribe(
+    res => console.log(res),
+  );
+
+  setTimeout(() => {
+    stream.subscribe(res => console.log(res));
+  }, 1500);
+
+  \`\`\`
+  `,
+
+  fetch_subj_2: ` \`\`\`javascript
+  const subject = new BehaviorSubject<any>(null);
+  const stream = this.http.get('https://jsonplaceholder.typicode.com/todos/1');
+
+  stream
+    .pipe(
+      tap(value => console.log(value)),
+      tap(value => subject.next(value))
+    )
+  .subscribe();
+
+  subject
+  .pipe(filter(Boolean))
+  .subscribe(res => this.inputValues.push(res));
+
+  setTimeout(() => {
+    subject.subscribe(res => this.inputValues.push(res));
+  }, 1500);
+
+  setTimeout(() => {
+    subject.subscribe(res => this.inputValues.push(res));
+  }, 2500);
+  \`\`\`
+  `,
+
 };
 
 

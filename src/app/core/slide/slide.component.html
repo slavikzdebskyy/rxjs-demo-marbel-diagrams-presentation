@@ -101,7 +101,7 @@
   </section>
 
   <section *ngSwitchCase="6">
-    <div class="two-columns">
+    <mark class="two-columns">
         <div>
             <h3 class="mrg-bot-20">Push - strategy</h3>
             <p>
@@ -123,7 +123,7 @@
             </p>
         </div>
 
-        <div>
+        <mark>
             <h3 class="mrg-bot-20">Pull - strategy</h3>
             <p>
                 <code>A1 = 1; B1 = 3;</code>
@@ -142,8 +142,8 @@
                   <br>
               </code>
             </p>
-        </div>
-    </div>
+        </mark>
+    </mark>
   </section>
 
   <section *ngSwitchCase="7">
@@ -457,13 +457,6 @@
         <ngx-md [data]="content['switchMap_2']">
         </ngx-md>
       </div>
-      <rxjs-marble-diagrams
-      #diagramComp
-      [class.hidden]="hidden"
-      [streamFirst]="streamFirst"
-      [labels]="['Stream:']"
-      >
-    </rxjs-marble-diagrams>
   </section>
 
   <section *ngSwitchCase="46">
@@ -475,11 +468,311 @@
       #diagramComp
       [class.hidden]="hidden"
       [streamFirst]="streamFirst"
+      [labels]="['Stream:']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="47">
+      <div class="slide-description">
+        <ngx-md [data]="content['switchMap_3']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
       [streamSecond]="streamSecond"
       [labels]="['Stream:']"
       >
     </rxjs-marble-diagrams>
   </section>
+
+  <section *ngSwitchCase="48">
+      <div class="slide-description">
+        <ngx-md [data]="content['switchMap_4']">
+        </ngx-md>
+      </div>
+      <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [labels]="['streamFirst:', 'streamSecond']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="49">
+      <div class="slide-description">
+        <ngx-md [data]="content['input_demo_1']">
+        </ngx-md>
+      </div>
+      <div class="input">
+        <input type="text" #input>
+      </div>
+      <div class="consolelog">
+        <h6 class="white">Console:</h6>
+        <span *ngFor="let item of inputValues">
+          <span class="white">></span>&nbsp;{{ item | json }} <br>
+        </span>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="50">
+      <div class="slide-description">
+        <ngx-md [data]="content['input_demo_2']">
+        </ngx-md>
+      </div>
+      <div class="input">
+        <input type="text" #input>
+      </div>
+      <div class="consolelog">
+        <h6 class="white">Console:</h6>
+        <span *ngFor="let item of inputValues">
+          <span class="white">></span>&nbsp;{{ item | json }} <br>
+        </span>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="51">
+      <div class="slide-description">
+        <ngx-md [data]="content['input_demo_3']">
+        </ngx-md>
+      </div>
+      <div class="input">
+        <input type="text" #input>
+      </div>
+      <div class="consolelog">
+        <h6 class="white">Console:</h6>
+        <span *ngFor="let item of inputValues">
+          <span class="white">></span>&nbsp;{{ item | json }} <br>
+        </span>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="52">
+      <div class="slide-description">
+        <ngx-md [data]="content['input_demo_4']">
+        </ngx-md>
+      </div>
+      <div class="input">
+        <input type="text" #input>
+      </div>
+      <div class="consolelog">
+        <h6 class="white">Console:</h6>
+        <span *ngFor="let item of inputValues">
+          <span class="white">></span>&nbsp;{{ item | json }} <br>
+        </span>
+      </div>
+  </section>
+
+  <section *ngSwitchCase="53">
+    <div class="cente-center">
+        <h2 class="fnt-size-80">Subject</h2>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="54">
+    <div class="slide-description">
+      <ngx-md [data]="content['subject_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="55">
+    <div class="slide-description">
+      <ngx-md [data]="content['subject_2']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="56">
+    <div class="slide-description">
+      <ngx-md [data]="content['subject_3']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="57">
+    <div class="slide-description">
+      <ngx-md [data]="content['subject_4']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['streamFirst:', 'streamSecond', 'streamThird']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="58">
+    <div class="slide-description">
+      <ngx-md [data]="content['subject_5']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['streamFirst:', 'streamSecond', 'streamThird']"
+      >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="59">
+    <div class="slide-description">
+      <ngx-md [data]="content['subject_6']">
+      </ngx-md>
+    </div>
+    <rxjs-marble-diagrams
+      #diagramComp
+      [class.hidden]="hidden"
+      [streamFirst]="streamFirst"
+      [streamSecond]="streamSecond"
+      [streamThird]="streamThird"
+      [labels]="['streamFirst:', 'streamSecond', 'streamThird']"
+      (demoStarted)="catchEmmit59()"
+    >
+    </rxjs-marble-diagrams>
+  </section>
+
+  <section *ngSwitchCase="60">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="61">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_2']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="62">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_3']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="63">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_4']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="64">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_5']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="65">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_6']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="66">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_7']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="67">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_8']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="68">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_9']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="69">
+    <div class="slide-description">
+      <ngx-md [data]="content['unsubscribe_10']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="70">
+    <div class="slide-description">
+      <ngx-md [data]="content['auth_1']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="71">
+    <div class="slide-description">
+      <ngx-md [data]="content['auth_2']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="72">
+    <div class="slide-description">
+      <ngx-md [data]="content['auth_3']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="73">
+    <div class="slide-description">
+      <ngx-md [data]="content['auth_4']">
+      </ngx-md>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="74">
+    <div class="slide-description">
+      <ngx-md [data]="content['fetch_subj_1']">
+      </ngx-md>
+    </div>
+    <div class="consolelog">
+      <h6 class="white">Console:</h6>
+      <span *ngFor="let item of inputValues">
+        <span class="white">></span>&nbsp;{{ item | json }} <br>
+      </span>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="75">
+    <div class="slide-description">
+      <ngx-md [data]="content['fetch_subj_2']">
+      </ngx-md>
+    </div>
+    <div class="consolelog">
+      <h6 class="white">Console:</h6>
+      <span *ngFor="let item of inputValues">
+        <span class="white">></span>&nbsp;{{ item | json }} <br>
+      </span>
+    </div>
+  </section>
+
+  <section *ngSwitchCase="76">
+    <div class="cente-center">
+        <h2 class="fnt-size-80">The End</h2>
+    </div>
+  </section>
+
 
 
 

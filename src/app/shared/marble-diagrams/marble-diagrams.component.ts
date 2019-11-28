@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef, Input, EventEmitter, Output } from '@angular/core';
 import { Subscription, interval, Observable } from 'rxjs';
 import { takeWhile, finalize } from 'rxjs/operators';
 import { EntryItem } from 'src/app/intrfaces/entry-item.interface';
@@ -11,6 +11,8 @@ import { COLORS } from 'src/app/core/constants/other';
 })
 export class MarbleDiagramsComponent implements OnInit, OnDestroy {
 
+  private readonly correctionOffset = 15;
+
   @ViewChild('filled', {static: true})
   public filled: ElementRef;
 
@@ -20,6 +22,7 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
   public offSetLeft1: number;
   public offSetLeft2: number;
   public offSetLeft3: number;
+  public isMoveDown: boolean;
 
   @Input()
   public streamFirst: Observable<string>;
@@ -29,6 +32,8 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
   public streamThird: Observable<string>;
   @Input()
   public labels: string[];
+  @Output()
+  private demoStarted: EventEmitter<void>;
 
   private offSetLeftStart: number;
   private subs: Subscription;
@@ -41,6 +46,8 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
     this.entriesThird = [];
     this.labels = [];
     this.colorIndex = 0;
+    this.demoStarted = new EventEmitter();
+    this.isMoveDown = false;
    }
 
   public ngOnInit(): void {
@@ -49,17 +56,10 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subs.unsubscribe();
+    this.streamFirst = null;
+    this.streamSecond = null;
+    this.streamThird = null;
   }
-
-  private initAll(): void {
-    this.subs = new Subscription();
-    this.entriesMain = [];
-    this.entriesSecond = [];
-    this.entriesThird = [];
-    this.labels = [];
-    this.colorIndex = 0;
-  }
-
   public get left1(): string {
     return `${this.offSetLeft1}px`;
   }
@@ -85,10 +85,14 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
   }
 
   private pushEntryItem(arr: EntryItem[], value: string | number = 0, offset: number, isLast = false): void {
+    const offSetLeft: string = isLast
+      ? `${offset + this.correctionOffset - this.offSetLeftStart}px`
+      : `${offset - this.offSetLeftStart}px`;
+
     const entryItem: EntryItem = {
       value,
       isLast,
-      offSetLeft: isLast ? `${offset + 15 - this.offSetLeftStart}px` : `${offset - this.offSetLeftStart}px`,
+      offSetLeft,
       color: isLast ? '#000' : COLORS[this.colorIndex],
     };
 
@@ -126,6 +130,7 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
         finalize(() => {
           isStopFillFirst = true;
           this.pushEntryItem(this.entriesMain, '', this.offSetLeft1, true);
+          this.offSetLeft1 += this.correctionOffset - 2;
         })
       )
       .subscribe(
@@ -158,6 +163,7 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
         finalize(() => {
           isStopFillSecond = true;
           this.pushEntryItem(this.entriesSecond, '', this.offSetLeft2, true);
+          this.offSetLeft2 += this.correctionOffset - 2;
         })
       )
       .subscribe(
@@ -190,6 +196,7 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
         finalize(() => {
           isStopFillThird = true;
           this.pushEntryItem(this.entriesThird, '', this.offSetLeft3, true);
+          this.offSetLeft3 += this.correctionOffset - 2;
         })
       )
       .subscribe(
@@ -200,6 +207,114 @@ export class MarbleDiagramsComponent implements OnInit, OnDestroy {
 
       this.subs.add(subId6);
     }
+
+  }
+  public startSubjectDemo(): void {
+
+    if (this.streamFirst) {
+      let isStopFillFirst = false;
+
+      const subId: Subscription = interval(15)
+      .pipe(
+        takeWhile(() => this.offSetLeft1 < 0 || !isStopFillFirst),
+      )
+      .subscribe(() => {
+        if (!isStopFillFirst) {
+          this.offSetLeft1++;
+        }
+      });
+
+      this.subs.add(subId);
+
+      const subId2: Subscription = this.streamFirst
+      .pipe(
+        finalize(() => {
+          isStopFillFirst = true;
+          this.pushEntryItem(this.entriesMain, '', this.offSetLeft1, true);
+          this.offSetLeft1 += this.correctionOffset - 2;
+        })
+      )
+      .subscribe(
+        (res: string) => {
+          this.incColorIndex();
+          this.pushEntryItem(this.entriesMain, res, this.offSetLeft1);
+        },
+      );
+
+      this.subs.add(subId2);
+    }
+
+    if (this.streamSecond) {
+
+      let isStopFillSecond = false;
+
+      const subId3: Subscription = interval(15)
+        .pipe(
+          takeWhile(() => this.offSetLeft2 < 0 || !isStopFillSecond),
+        )
+        .subscribe(() => {
+          if (!isStopFillSecond) {
+            this.offSetLeft2++;
+          }
+        });
+
+      this.subs.add(subId3);
+
+      setTimeout(() => {
+        const subId4: Subscription = this.streamSecond
+        .pipe(
+          finalize(() => {
+            isStopFillSecond = true;
+            this.pushEntryItem(this.entriesSecond, '', this.offSetLeft2, true);
+            this.offSetLeft2 += this.correctionOffset - 2;
+          })
+        )
+        .subscribe(
+          (res: string) => {
+            this.incColorIndex();
+            this.pushEntryItem(this.entriesSecond, res, this.offSetLeft2);
+          },
+        );
+
+        this.subs.add(subId4);
+      }, 1200);
+    }
+
+    if (this.streamThird) {
+      let isStopFillThird = false;
+
+      const subId5: Subscription = interval(15)
+        .pipe(
+          takeWhile(() => this.offSetLeft3 < 0 || !isStopFillThird),
+        )
+        .subscribe(() => {
+          if (!isStopFillThird) {
+            this.offSetLeft3++;
+          }
+        });
+
+      this.subs.add(subId5);
+
+      setTimeout(() => {
+        const subId6: Subscription = this.streamThird
+          .pipe(
+            finalize(() => {
+              isStopFillThird = true;
+              this.pushEntryItem(this.entriesThird, '', this.offSetLeft3, true);
+              this.offSetLeft3 += this.correctionOffset - 2;
+            })
+          )
+          .subscribe(
+            (res: string) => {
+              this.pushEntryItem(this.entriesThird, res, this.offSetLeft3);
+            },
+          );
+
+        this.subs.add(subId6);
+      }, 2200);
+    }
+
+    this.demoStarted.emit();
 
   }
 
